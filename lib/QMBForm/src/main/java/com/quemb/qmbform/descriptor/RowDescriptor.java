@@ -202,6 +202,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         if (mHint == android.R.string.untitled) {
             return null;
         }
+        System.out.println("hint " +context.getString(mHint));
         return context.getString(mHint);
 
     }
@@ -286,5 +287,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
     public boolean isLastRowInSection() {
         return mLastRowInSection;
     }
+
+
 }
 

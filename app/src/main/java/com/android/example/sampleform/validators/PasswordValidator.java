@@ -17,11 +17,17 @@ public class PasswordValidator implements FormValidator {
 
     @Override
     public RowValidationError validate(RowDescriptor descriptor) {
-        Value value = descriptor.getValue();
-        if (value.getValue() != null && value.getValue() instanceof String){
-            String password = (String) value.getValue();
-            return (password.matches(PASSWORD_PATTERN)) ? null : new RowValidationError(descriptor,  R.string.invalid_password);
+        try {
+            Value value = descriptor.getValue();
+            if (descriptor.getValue() != null && value.getValue() instanceof String){
+                String password = (String) value.getValue();
+                return (password.matches(PASSWORD_PATTERN)) ? null : new RowValidationError(descriptor,  R.string.invalid_password);
+            }
         }
+        catch (NullPointerException e){
+            return new RowValidationError(descriptor, R.string.invalid_password);
+        }
+
         return new RowValidationError(descriptor, R.string.invalid_password);
     }
 }

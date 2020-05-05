@@ -216,4 +216,6 @@ public abstract class Cell extends LinearLayout {
             }
         }
     }
+
+
 }

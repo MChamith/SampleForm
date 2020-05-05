@@ -1,29 +1,41 @@
 package com.android.example.sampleform;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
-import com.android.example.sampleform.validators.DateValidator;
 import com.android.example.sampleform.validators.EmailValidator;
 import com.android.example.sampleform.validators.PasswordValidator;
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
-import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
+import com.quemb.qmbform.descriptor.OnFocusChangeListener;
+import com.quemb.qmbform.descriptor.OnFormRowChangeListener;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.RowValidationError;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
+import com.quemb.qmbform.view.FormEditTextFieldCell;
 
 import java.util.HashMap;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnFormRowValueChangedListener, OnFormRowClickListener {
+public class MainActivity extends AppCompatActivity implements OnFormRowValueChangedListener, OnFormRowClickListener,OnFocusChangeListener, OnFormRowChangeListener {
 
 
 
     private ListView mListView;
+    private boolean PASSWORD_FOCUS = false;
+    private boolean EMAIL_FOCUS = false;
+    private boolean USERNAME_FOCUS = false;
+    private boolean DATE_FOCUS = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,87 +47,144 @@ public class MainActivity extends AppCompatActivity implements OnFormRowValueCha
         // More styles and colors for cells
         HashMap<String, Object> cellConfig = new HashMap<>(8);
 
-        // TextAppearance for section, label, value and button
-        cellConfig.put(CellDescriptor.APPEARANCE_SECTION, Integer.valueOf(R.style.TextAppearance_Form_Section));
-        cellConfig.put(CellDescriptor.APPEARANCE_TEXT_LABEL, Integer.valueOf(R.style.TextAppearance_Form_Label));
-        cellConfig.put(CellDescriptor.APPEARANCE_TEXT_VALUE, Integer.valueOf(R.style.TextAppearance_Form_Value));
-        cellConfig.put(CellDescriptor.APPEARANCE_BUTTON, Integer.valueOf(R.style.TextAppearance_Form_Button));
-
-        // Disabled color for label and value
-        cellConfig.put(CellDescriptor.COLOR_LABEL, Integer.valueOf(0x80C0FFC0));
-        cellConfig.put(CellDescriptor.COLOR_VALUE, Integer.valueOf(0xC0C0FFC0));
-
-        // Disabled color for label and value
-        cellConfig.put(CellDescriptor.COLOR_LABEL_DISABLED, Integer.valueOf(0x80FFC0C0));
-        cellConfig.put(CellDescriptor.COLOR_VALUE_DISABLED, Integer.valueOf(0xC0FFC0C0));
-
-
         FormDescriptor descriptor = FormDescriptor.newInstance();
         descriptor.setCellConfig(cellConfig);
-        descriptor.setOnFormRowValueChangedListener(this); //Listen for changes
+        descriptor.setOnFormRowChangeListener(this);
 
-        SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("tag","Title");
-        descriptor.addSection(sectionDescriptor);
+        SectionDescriptor userNameDescriptor = SectionDescriptor.newInstance("Username");
+        descriptor.addSection(userNameDescriptor);
+        SectionDescriptor passwordDescriptor = SectionDescriptor.newInstance("Passowrd");
+        descriptor.addSection(passwordDescriptor);
+        SectionDescriptor emailDescriptor = SectionDescriptor.newInstance("Email");
+        descriptor.addSection(emailDescriptor);
+        SectionDescriptor dateDescriptor = SectionDescriptor.newInstance("Date");
+        descriptor.addSection(dateDescriptor);
         mListView = findViewById(R.id.list);
-//Add rows - form elements
-//        final RowDescriptor userName =
-//                RowDescriptor.newInstance("detail", RowDescriptor.FormRowDescriptorTypeTextInline, "Title", new Value<String>("Detail"));
-//        sectionDescriptor.addRow(userName);
 
-        final RowDescriptor userName = RowDescriptor.newInstance("UserName",RowDescriptor.FormRowDescriptorTypeEmail,"Username" );
-        sectionDescriptor.addRow(userName);
 
-        final RowDescriptor password = RowDescriptor.newInstance("Password",RowDescriptor.FormRowDescriptorTypePassword,"Password" );
+        final RowDescriptor userName = RowDescriptor.newInstance("UserName",RowDescriptor.FormRowDescriptorTypeText, "Username");
+        userNameDescriptor.addRow(userName, 0);
+
+        final RowDescriptor password = RowDescriptor.newInstance("Password",RowDescriptor.FormRowDescriptorTypePassword ,"Password");
+
         password.addValidator(new PasswordValidator());
-        sectionDescriptor.addRow(password);
-
-        final RowDescriptor email = RowDescriptor.newInstance("Email",RowDescriptor.FormRowDescriptorTypeEmail,"Email");
+        passwordDescriptor.addRow(password,0);
+//
+        final RowDescriptor email = RowDescriptor.newInstance("Email",RowDescriptor.FormRowDescriptorTypeEmail, "Email");
         email.addValidator(new EmailValidator());
-        sectionDescriptor.addRow(email);
+        emailDescriptor.addRow(email);
 
-        final RowDescriptor date = RowDescriptor.newInstance("Date",RowDescriptor.FormRowDescriptorTypeDate,"Date");
-        email.addValidator(new DateValidator());
-        sectionDescriptor.addRow(date);
-
-
-
-
-//        sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeText, "Text", new Value<String>("test")) );
-//        sectionDescriptor.addRow( RowDescriptor.newInstance("dateDialog",RowDescriptor.FormRowDescriptorTypeDate, "Date Dialog") );
-
+        final RowDescriptor dateLabel = RowDescriptor.newInstance("DateLable",RowDescriptor.FormRowDescriptorTypeDate, "Date" );
+        dateDescriptor.addRow(dateLabel);
 
 
         FormManager formManager = new FormManager();
         formManager.setup(descriptor, mListView, this);
-
         formManager.setOnFormRowClickListener(this);
         formManager.setOnFormRowValueChangedListener(this);
+        formManager.setOnFocusChangeListener(this);
 
 
-
-
-//        String customType = "customRowIdentifier";
-//        CellViewFactory.getInstance().setRowTypeMap(customType, FormBaseCell.class);
-//
-//        RowDescriptor customRow = RowDescriptor.newInstance("custom",customType, "title", new Value<String>("value"));
-//        HashMap<String, Object> cellConfig = new HashMap();
-//        cellConfig.put("config",Integer.valueOf(R.style.TextAppearance_Form_Section));
-//        customRow.setCellConfig(cellConfig);
-//        section.addRow(customRow);
     }
+
+
 
     @Override
     public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue) {
-
-        boolean valid = rowDescriptor.isValid();
-        System.out.println("Validation is" + valid );
 
     }
 
     @Override
     public void onFormRowClick(FormItemDescriptor itemDescriptor) {
+        System.out.println("Form clicked " + itemDescriptor.getCell());
+    }
 
 
+    @Override
+    public void focusChanged(RowDescriptor rowDescriptor, boolean hasFocus) {
+
+        String tag = rowDescriptor.getTag();
+
+
+        if (hasFocus) {
+            if (tag.equals("UserName")) {
+                USERNAME_FOCUS = true;
+            } else if (tag.equals("Password")) {
+                PASSWORD_FOCUS = true;
+            } else if (tag.equals("Email")) {
+                EMAIL_FOCUS = true;
+            }
+        }
+
+        if (!hasFocus && tag.equals("Password") && PASSWORD_FOCUS) {
+            int index = rowDescriptor.getSectionDescriptor().getIndexOfRowDescriptor(rowDescriptor);
+            SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
+
+            if (!rowDescriptor.isValid()) {
+                List errors = rowDescriptor.getValidationErrors();
+                for (Object err : errors) {
+                    RowValidationError rowerr = (RowValidationError) err;
+                    String errorMessage = rowerr.getMessage(this);
+                    int rowCount = sectionDescriptor.getRowCount();
+                    if(rowCount ==1){
+                        sectionDescriptor.addRow(RowDescriptor.newInstance("passwordError", RowDescriptor.FormRowDescriptorTypeDetail, "Error", new Value<String>(errorMessage)), index + 1);
+                    }
+                }
+            }
+        }
+        if (!hasFocus && tag.equals("Email") && EMAIL_FOCUS) {
+            int index = rowDescriptor.getSectionDescriptor().getIndexOfRowDescriptor(rowDescriptor);
+            SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
+
+            if (!rowDescriptor.isValid()) {
+                List errors = rowDescriptor.getValidationErrors();
+                for (Object err : errors) {
+                    RowValidationError rowerr = (RowValidationError) err;
+                    String errorMessage = rowerr.getMessage(this);
+                    int rowCount = sectionDescriptor.getRowCount();
+                    if(rowCount ==1){
+                        sectionDescriptor.addRow(RowDescriptor.newInstance("emailError", RowDescriptor.FormRowDescriptorTypeDetail, "Error", new Value<String>(errorMessage)), index + 1);
+                    }
+
+                }
+
+            }
+        }
+        if (!hasFocus && tag.equals("Date") && DATE_FOCUS) {
+            int index = rowDescriptor.getSectionDescriptor().getIndexOfRowDescriptor(rowDescriptor);
+            SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
+
+            if (!rowDescriptor.isValid()) {
+                List errors = rowDescriptor.getValidationErrors();
+                for (Object err : errors) {
+                    RowValidationError rowerr = (RowValidationError) err;
+                    String errorMessage = rowerr.getMessage(this);
+                    int rowCount = sectionDescriptor.getRowCount();
+                    if(rowCount ==1){
+                        sectionDescriptor.addRow(RowDescriptor.newInstance("dateError", RowDescriptor.FormRowDescriptorTypeDetail, "Error", new Value<String>(errorMessage)), index + 1);
+                    }
+
+                }
+
+            }
+        }
+    }
+
+    @Override
+    public void onRowAdded(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+        String tag = rowDescriptor.getTag();
+        if(tag.equals("Password")){
+            rowDescriptor.setHint(1);
+        }
+    }
+
+    @Override
+    public void onRowRemoved(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+
+    }
+
+    @Override
+    public void onRowChanged(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
 
     }
 }

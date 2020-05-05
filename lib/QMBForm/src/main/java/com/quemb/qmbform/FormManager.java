@@ -3,6 +3,7 @@ package com.quemb.qmbform;
 import com.quemb.qmbform.adapter.FormAdapter;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
+import com.quemb.qmbform.descriptor.OnFocusChangeListener;
 import com.quemb.qmbform.descriptor.OnFormRowChangeListener;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
@@ -22,13 +23,14 @@ import java.util.ArrayList;
 /**
  * Created by tonimoeckel on 15.07.14.
  */
-public class FormManager implements OnFormRowChangeListener, OnFormRowValueChangedListener {
+public class FormManager implements OnFormRowChangeListener, OnFormRowValueChangedListener, OnFocusChangeListener {
 
     private FormDescriptor mFormDescriptor;
     protected ListView mListView;
     protected OnFormRowClickListener mOnFormRowClickListener;
     private OnFormRowChangeListener mOnFormRowChangeListener;
     private OnFormRowValueChangedListener mOnFormRowValueChangedListener;
+    private OnFocusChangeListener mOnFouceChangedListener;
 
     public FormManager(){
 
@@ -43,6 +45,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
         mFormDescriptor = formDescriptor;
         mFormDescriptor.setOnFormRowChangeListener(this);
         mFormDescriptor.setOnFormRowValueChangedListener(this);
+        mFormDescriptor.setOnFocusChangeListener(this);
 
         final FormAdapter adapter = FormAdapter.newInstance(mFormDescriptor, context);
         listView.setAdapter(adapter);
@@ -144,4 +147,19 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
             OnFormRowValueChangedListener onFormRowValueChangedListener) {
         mOnFormRowValueChangedListener = onFormRowValueChangedListener;
     }
+
+
+    @Override
+    public void focusChanged(RowDescriptor rowDescriptor, boolean hasFocus) {
+        if(mOnFouceChangedListener!= null){
+            mOnFouceChangedListener.focusChanged(rowDescriptor, hasFocus);
+        }
+
+    }
+
+    public void setOnFocusChangeListener(OnFocusChangeListener onFocusChangeListener){
+        mOnFouceChangedListener = onFocusChangeListener;
+    }
+
+    public OnFocusChangeListener getOnFocusChangeListener(){return mOnFouceChangedListener;}
 }

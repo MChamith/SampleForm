@@ -1,6 +1,9 @@
 package com.quemb.qmbform.descriptor;
 
 import android.content.Context;
+import android.os.MessageQueue;
+
+import com.quemb.qmbform.FormManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +19,7 @@ public class FormDescriptor {
     private ArrayList<SectionDescriptor> mSections;
     private OnFormRowValueChangedListener mOnFormRowValueChangedListener;
     private OnFormRowChangeListener mOnFormRowChangeListener;
+    private OnFocusChangeListener mOnFocusChangeListener;
 
     public static FormDescriptor newInstance(){
         return FormDescriptor.newInstance(null);
@@ -174,4 +178,9 @@ public class FormDescriptor {
         return m;
     }
 
+    public void setOnFocusChangeListener(OnFocusChangeListener onFocusChangeListener) {
+        mOnFocusChangeListener = onFocusChangeListener;
+    }
+
+    public OnFocusChangeListener getOnFocusChangeListener(){return mOnFocusChangeListener;}
 }

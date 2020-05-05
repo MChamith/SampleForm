@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 
 /**
@@ -18,6 +20,7 @@ import android.widget.EditText;
 public class FormEditTextFieldCell extends FormTitleFieldCell {
 
     private EditText mEditView;
+    private String tag;
 
     public FormEditTextFieldCell(Context context,
                                  RowDescriptor rowDescriptor) {
@@ -56,12 +59,24 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
             }
         });
 
+        mEditView.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                FormEditTextFieldCell.this.onFocusChange(hasFocus);
+
+            }
+        });
+
     }
 
     protected void onEditTextChanged(String string) {
         onValueChanged(new Value<String>(string));
     }
 
+    protected void onFocusChange(boolean hasFocus){
+//        Log.d("FousText", "Focus on Formbase text field");
+        focusChanged(hasFocus);
+    }
     @Override
     protected int getResource() {
         return R.layout.edit_text_field_cell;

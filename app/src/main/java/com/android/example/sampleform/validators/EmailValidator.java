@@ -14,11 +14,16 @@ public class EmailValidator implements FormValidator {
     @Override
     public RowValidationError validate(RowDescriptor descriptor) {
 
-        Value value = descriptor.getValue();
-        if (value.getValue() != null && value.getValue() instanceof String) {
-            String val = (String) value.getValue();
-            return (val.matches(EMAIL_PATTERN)) ? null : new RowValidationError(descriptor,  R.string.validation_invalid_email);
+        try{
+            Value value = descriptor.getValue();
+            if (value.getValue() != null && value.getValue() instanceof String) {
+                String val = (String) value.getValue();
+                return (val.matches(EMAIL_PATTERN)) ? null : new RowValidationError(descriptor,  R.string.validation_invalid_email);
+            }
         }
-        return new RowValidationError(descriptor, R.string.validation_invalid_email);
+        catch (NullPointerException e){
+            return new RowValidationError(descriptor,  R.string.validation_invalid_email);
+        }
+        return new RowValidationError(descriptor,  R.string.validation_invalid_email);
     }
 }

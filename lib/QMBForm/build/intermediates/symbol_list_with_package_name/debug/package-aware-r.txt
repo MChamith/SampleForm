@@ -353,6 +353,7 @@ color material_grey_600
 color material_grey_800
 color material_grey_850
 color material_grey_900
+color meetsid_text_grey
 color notification_action_color_filter
 color notification_icon_bg_color
 color primary_dark_material_dark

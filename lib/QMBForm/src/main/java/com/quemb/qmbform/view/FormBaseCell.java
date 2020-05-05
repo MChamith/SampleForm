@@ -11,10 +11,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.appcompat.widget.AppCompatDrawableManager;
 
 //import android.support.v7.widget.AppCompatDrawableManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -166,6 +167,16 @@ public abstract class FormBaseCell extends Cell {
             }
         }
 
+    }
+
+    public void focusChanged(boolean hasFocus){
+        RowDescriptor row = getRowDescriptor();
+        com.quemb.qmbform.descriptor.OnFocusChangeListener listener = getRowDescriptor().getSectionDescriptor().getFormDescriptor().getOnFocusChangeListener();
+        listener.focusChanged(row,  hasFocus);
+//        if(listener !=null){
+//            Log.d("Fous", "Focus on Formbase cell");
+//            listener.focusChanged(row,  hasFocus);
+//        }
     }
 
 
