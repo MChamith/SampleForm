@@ -71,6 +71,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
     public static final String FormRowDescriptorTypeSectionSeperator = "sectionSeperator";
     public static final String FormRowDescriptorTypeHtmlVertical = "htmlVertical";
     public static final String FormRowDescriptorTypeSelectorMultipleDialog = "selectorMultipleDialog";
+    public static final String FormRowDescriptorTypeFloatingTextView = "floatingTextView";
 
     private String mRowType;
     private Value<T> mValue;
@@ -116,6 +117,20 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         descriptor.mTag = tag;
         descriptor.mRowType = rowType;
         descriptor.setValue(value);
+        descriptor.mValidators = new ArrayList<FormValidator>();
+
+        return descriptor;
+
+    }
+
+    public static RowDescriptor newInstance(String tag, String rowType, String title, Value<?> value, int mHint) {
+
+        RowDescriptor descriptor = new RowDescriptor();
+        descriptor.mTitle = title;
+        descriptor.mTag = tag;
+        descriptor.mRowType = rowType;
+        descriptor.setValue(value);
+        descriptor.setHint(mHint);
         descriptor.mValidators = new ArrayList<FormValidator>();
 
         return descriptor;
@@ -202,7 +217,6 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         if (mHint == android.R.string.untitled) {
             return null;
         }
-        System.out.println("hint " +context.getString(mHint));
         return context.getString(mHint);
 
     }

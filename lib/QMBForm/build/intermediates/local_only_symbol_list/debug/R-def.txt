@@ -22,7 +22,9 @@ id checkBox
 id datePicker
 id detailTextView
 id editText
+id edit_floating_Text
 id imageButton
+id mailInput
 id seekBar
 id spinner
 id switchControl
@@ -39,6 +41,7 @@ layout detail_text_field_cell
 layout detail_text_inline_field_cell
 layout detail_text_vertical_field_cell
 layout edit_text_field_cell
+layout edit_text_floating_cell
 layout edit_text_inline_field_cell
 layout edit_text_view_field_cell
 layout edit_text_view_inline_field_cell

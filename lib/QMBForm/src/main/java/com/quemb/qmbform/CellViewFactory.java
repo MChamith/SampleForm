@@ -26,6 +26,7 @@ import com.quemb.qmbform.view.FormEditPasswordFieldCell;
 import com.quemb.qmbform.view.FormEditPasswordInlineFieldCell;
 import com.quemb.qmbform.view.FormEditPhoneFieldCell;
 import com.quemb.qmbform.view.FormEditTextFieldCell;
+import com.quemb.qmbform.view.FormEditTextFloatingFieldCell;
 import com.quemb.qmbform.view.FormEditTextInlineFieldCell;
 import com.quemb.qmbform.view.FormEditTextViewFieldCell;
 import com.quemb.qmbform.view.FormEditTextViewInlineFieldCell;
@@ -120,6 +121,7 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHTMLText, FormEditHTMLTextViewFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSectionSeperator, SeperatorSectionCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHtmlVertical, FormDetailHtmlTextVerticalFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeFloatingTextView, FormEditTextFloatingFieldCell.class);
     }
 
     public Cell createViewForFormItemDescriptor(Context context, FormItemDescriptor descriptor) {
