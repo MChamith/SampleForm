@@ -1,6 +1,7 @@
 package com.quemb.qmbform.view;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
@@ -8,16 +9,27 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.widget.AppCompatEditText;
+
+import com.google.android.material.textfield.TextInputLayout;
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.RowValidationError;
 import com.quemb.qmbform.descriptor.Value;
 
-public class FormEditTextFloatingFieldCell extends FormEditTextFieldCell {
+import java.util.List;
+
+public class FormEditTextFloatingFieldCell extends FormBaseCell {
     private EditText mEditView;
+    private TextInputLayout textInputLayout;
+    private RowDescriptor rowDescriptor;
+    Context context;
 
     public FormEditTextFloatingFieldCell(Context context, RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
+        this.rowDescriptor = rowDescriptor;
+        this.context = context;
     }
 
     private Handler handler = new Handler();
@@ -27,10 +39,12 @@ public class FormEditTextFloatingFieldCell extends FormEditTextFieldCell {
     protected void init() {
 
         super.init();
-        mEditView = (EditText) findViewById(R.id.edit_floating_Text);
+        mEditView = (AppCompatEditText) findViewById(R.id.edit_floating_Text);
         mEditView.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        textInputLayout = (TextInputLayout) findViewById(R.id.textInput);
+        textInputLayout.setHelperTextEnabled(true);
 
-        setStyleId(mEditView, CellDescriptor.APPEARANCE_TEXT_VALUE, CellDescriptor.COLOR_VALUE);
+//        setStyleId(mEditView, CellDescriptor.APPEARANCE_TEXT_VALUE, CellDescriptor.COLOR_VALUE);
     }
 
     @Override
@@ -55,7 +69,24 @@ public class FormEditTextFloatingFieldCell extends FormEditTextFieldCell {
         mEditView.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                FormEditTextFloatingFieldCell.this.onFocusChange(hasFocus);
+
+                System.out.println(getRowDescriptor().getTag().toString() + " focus " + hasFocus);
+
+                if (!(hasFocus) && (mEditView.getText().toString().length()>0)) {
+                    if (!getRowDescriptor().isValid()) {
+                        List errors = rowDescriptor.getValidationErrors();
+                        for (Object err : errors) {
+                            RowValidationError rowerr = (RowValidationError) err;
+                            String errorMessage = rowerr.getMessage(context);
+                            textInputLayout.setHelperText(errorMessage);
+                            textInputLayout.setHelperTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_red1)));
+//                            mEditView.clearFocus();
+
+                        }
+                    }
+
+//                    focusChanged(hasFocus);
+                }
 
             }
         });
@@ -78,7 +109,7 @@ public class FormEditTextFloatingFieldCell extends FormEditTextFieldCell {
     @Override
     protected void update() {
 
-        super.update();
+//        super.update();
 
         updateEditView();
 
@@ -96,7 +127,10 @@ public class FormEditTextFloatingFieldCell extends FormEditTextFieldCell {
 
         String hint = getRowDescriptor().getHint(getContext());
         if (hint != null) {
-            mEditView.setHint(hint);
+            TextInputLayout textInputLayout = (TextInputLayout)findViewById(R.id.textInput);
+            textInputLayout.setHint(hint);
+
+            textInputLayout.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_green)));
         }
 
         @SuppressWarnings("unchecked") Value<String> value = (Value<String>) getRowDescriptor().getValue();

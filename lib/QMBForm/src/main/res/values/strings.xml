@@ -15,6 +15,6 @@
     <string name="cm_label">cm</string>
     <string name="test_error"/>
     <string name="nonpositive_number_error">must be greater than zero</string>
-    <string name="invalid_password" translatable="false">Must contain 8 characters, Uppercase lower case and numeric</string>
+    <string name="invalid_password" translatable="false">Use 8 or more character\nMust Contain letters, numbers and symbol</string>
     <string name="date_error" translatable="false">not a valid date</string>
 </resources>

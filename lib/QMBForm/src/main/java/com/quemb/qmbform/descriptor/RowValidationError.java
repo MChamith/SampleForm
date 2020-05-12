@@ -20,8 +20,7 @@ public class RowValidationError {
     }
 
     public String getMessage(Context context) {
-        return getRowDescriptor().getTitle() + " " +
-                context.getString(getResourceMessage());
+        return context.getString(getResourceMessage());
     }
 
     public RowDescriptor getRowDescriptor() {

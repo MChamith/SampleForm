@@ -1,0 +1,45 @@
+<resources>
+
+    <style name="MyTextInputLayout">
+
+        <!-- Style attributes -->
+<!--        <item name="boxCornerRadiusBottomStart">0dp</item>-->
+<!--        <item name="boxCornerRadiusTopStart">24dp</item>-->
+<!--        <item name="boxCornerRadiusTopEnd">24dp</item>-->
+<!--        <item name="boxCornerRadiusBottomEnd">0dp</item>-->
+<!--        <item name="boxBackgroundColor">#80ABCDEF</item>-->
+
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="errorTextAppearance">@style/ErrorText</item>
+        <item name="counterTextAppearance">@style/HintText</item>
+
+
+        <!-- Theme attributes -->
+        <item name="android:textColorHint">@color/meetsid_text_grey</item>
+
+        <item name="colorControlNormal">@color/meetsid_text_grey</item>
+        <item name="colorControlActivated">@color/meetsid_green</item>
+
+    </style>
+
+    <style name="TextInputLayoutHintText" parent="TextAppearance.Design.Hint">
+        <item name="android:gravity">bottom</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/meetsid_green</item>
+        <item name="android:colorActivatedHighlight">@color/meetsid_green</item>
+        <item name="android:state_focused">false</item>
+    </style>
+
+
+    <style name="ErrorText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="HintText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/meetsid_red1</item>
+        <item name="android:textSize">14sp</item>
+
+    </style>
+</resources>

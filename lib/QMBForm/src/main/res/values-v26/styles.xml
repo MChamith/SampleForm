@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextInputLayoutHintText" parent="TextAppearance.Design.Hint">
+        <item name="android:gravity">bottom</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/meetsid_green</item>
+        <item name="android:colorActivatedHighlight">@color/meetsid_green</item>
+        <item name="android:state_focused">false</item>
+    </style>
+</resources>

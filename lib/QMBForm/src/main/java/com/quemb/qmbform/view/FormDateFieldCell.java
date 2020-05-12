@@ -30,7 +30,7 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
         super.init();
         mTextView = (TextView) findViewById(R.id.textView);
 
-        setStyleId(mTextView, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_LABEL);
+//        setStyleId(mTextView, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_LABEL);
 
     }
 

@@ -62,6 +62,7 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
         mEditView.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                System.out.println(getRowDescriptor().getTag().toString() + " focus " + hasFocus);
                 FormEditTextFieldCell.this.onFocusChange(hasFocus);
 
             }
@@ -102,6 +103,7 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
     protected void updateEditView() {
 
         String hint = getRowDescriptor().getHint(getContext());
+        System.out.println("hint " +hint);
         if (hint != null) {
             mEditView.setHint(hint);
         }

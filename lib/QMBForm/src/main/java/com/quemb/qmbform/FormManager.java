@@ -1,6 +1,7 @@
 package com.quemb.qmbform;
 
 import com.quemb.qmbform.adapter.FormAdapter;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.OnFocusChangeListener;
@@ -20,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -155,23 +157,27 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
 
     @Override
     public void focusChanged(RowDescriptor rowDescriptor, boolean hasFocus) {
-        if(mOnFouceChangedListener!= null){
-            if (!hasFocus) {
-                int index = rowDescriptor.getSectionDescriptor().getIndexOfRowDescriptor(rowDescriptor);
-                SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
 
-                if (!rowDescriptor.isValid()) {
-                    List errors = rowDescriptor.getValidationErrors();
-                    for (Object err : errors) {
-                        RowValidationError rowerr = (RowValidationError) err;
-                        String errorMessage = rowerr.getMessage(this.context);
-                        int rowCount = sectionDescriptor.getRowCount();
-                        if(rowCount ==1){
-                            sectionDescriptor.addRow(RowDescriptor.newInstance(rowDescriptor.getTag()+"_error", RowDescriptor.FormRowDescriptorTypeDetail, "Error", new Value<String>(errorMessage)), index + 1);
-                        }
-                    }
-                }
-            }
+
+        if(mOnFouceChangedListener!= null){
+//            if (!hasFocus) {
+//                int index = rowDescriptor.getSectionDescriptor().getIndexOfRowDescriptor(rowDescriptor);
+//                SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
+//
+//                if (!rowDescriptor.isValid()) {
+//                    List errors = rowDescriptor.getValidationErrors();
+//                    for (Object err : errors) {
+//                        RowValidationError rowerr = (RowValidationError) err;
+//                        String errorMessage = rowerr.getMessage(this.context);
+//                        System.out.println("error " + errorMessage);
+//                        int rowCount = sectionDescriptor.getRowCount();
+//                        if(rowCount ==1){
+//                            RowDescriptor errorRow = RowDescriptor.newInstance(rowDescriptor.getTag()+"_error", RowDescriptor.FormRowDescriptorTypeErrorView, null, new Value<String>(errorMessage));
+//                            sectionDescriptor.addRow(errorRow, index + 1);
+//                        }
+//                    }
+//                }
+//            }
             mOnFouceChangedListener.focusChanged(rowDescriptor, hasFocus);
         }
 

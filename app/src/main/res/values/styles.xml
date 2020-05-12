@@ -7,7 +7,7 @@
         <item name="actionMenuTextColor">@color/white</item>
         <item name="android:windowBackground">@color/black75PercentColor</item>
 
-        <item name="android:textColor">@color/black25PercentColor</item><!-- TextView color -->
+        <item name="android:textColor">@color/meetsid_red1</item><!-- TextView color -->
         <item name="android:textColorPrimary">@color/black</item><!-- pre-Lollipop EditText color -->
         <item name="android:editTextColor">@color/black</item><!-- Lollipop+ EditText color -->
 
@@ -27,6 +27,8 @@
         <item name="android:listDivider">@null</item>
     </style>
 
+
+
     <style name="TextAppearance.Form.Section" parent="@style/TextAppearance.AppCompat.Title">
         <item name="android:textAllCaps">true</item><!-- default textSize: 20sp -->
     </style>
@@ -34,7 +36,7 @@
         <item name="android:textSize">16sp</item><!-- default textSize: 14sp, font: Regular -->
     </style>
     <style name="TextAppearance.Form.Value" parent="@style/TextAppearance.AppCompat.Body2">
-        <item name="android:textSize">16sp</item><!-- default textSize: 14sp, font: Medium -->
+        <item name="android:textSize">16sp</item><!-- default textSize: 14sp, font: Regular -->
     </style>
     <style name="TextAppearance.Form.Button" parent="@style/TextAppearance.AppCompat.Subhead">
         <item name="android:textAllCaps">true</item><!-- default textSize: 16sp -->

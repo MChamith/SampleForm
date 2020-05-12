@@ -1,5 +1,6 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 
@@ -166,7 +167,7 @@ public abstract class Cell extends LinearLayout {
         else
             defaultColor = getDefaultColor(colorConfig);
 
-        textView.setTextColor(defaultColor);
+        textView.setTextColor(getResources().getColor(R.color.meetsid_green));
 
         return styleFound;
     }

@@ -28,23 +28,23 @@ public class FormDetailTextInlineFieldCell extends FormTitleFieldCell {
 
         super.init();
         mDetailTextView = (TextView) findViewById(R.id.detailTextView);
-        if (setStyleId(mDetailTextView, CellDescriptor.APPEARANCE_TEXT_VALUE, CellDescriptor.COLOR_VALUE) == false)
-        {
-            // If no specific style is defined for APPEARANCE_TEXT_VALUE,
-            // set inline text size to the default EditText size.
-
-            // Get the android:textAppearance item from R.style.Widget_AppCompat_EditText (default EditText style)
-            int editTextAppearanceId = getStyleItemResourceId(mDetailTextView.getContext(),
-                    R.style.Widget_AppCompat_EditText, android.R.attr.textAppearance, android.R.attr.textAppearanceMediumInverse);
-
-            // Get the android:textSize item from retrieved textAppearance style
-            DisplayMetrics displayMetrics = mDetailTextView.getContext().getResources().getDisplayMetrics();
-            float editSize = getStyleItemDimension(mDetailTextView.getContext(),
-                    editTextAppearanceId, android.R.attr.textSize, 18f * (displayMetrics.densityDpi / 160f));
-
-            // Set inline text size
-            mDetailTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, editSize);
-        }
+//        if (!setStyleId(mDetailTextView, CellDescriptor.APPEARANCE_TEXT_VALUE, CellDescriptor.COLOR_VALUE))
+//        {
+//            // If no specific style is defined for APPEARANCE_TEXT_VALUE,
+//            // set inline text size to the default EditText size.
+//
+//            // Get the android:textAppearance item from R.style.Widget_AppCompat_EditText (default EditText style)
+//            int editTextAppearanceId = getStyleItemResourceId(mDetailTextView.getContext(),
+//                    R.style.Widget_AppCompat_EditText, android.R.attr.textAppearance, android.R.attr.textAppearanceMediumInverse);
+//
+//            // Get the android:textSize item from retrieved textAppearance style
+//            DisplayMetrics displayMetrics = mDetailTextView.getContext().getResources().getDisplayMetrics();
+//            float editSize = getStyleItemDimension(mDetailTextView.getContext(),
+//                    editTextAppearanceId, android.R.attr.textSize, 18f * (displayMetrics.densityDpi / 160f));
+//
+//            // Set inline text size
+//            mDetailTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, editSize);
+//        }
     }
 
     @Override

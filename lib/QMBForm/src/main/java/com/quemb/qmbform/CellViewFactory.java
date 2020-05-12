@@ -23,6 +23,7 @@ import com.quemb.qmbform.view.FormEditIntegerInlineFieldCell;
 import com.quemb.qmbform.view.FormEditNumberFieldCell;
 import com.quemb.qmbform.view.FormEditNumberInlineFieldCell;
 import com.quemb.qmbform.view.FormEditPasswordFieldCell;
+import com.quemb.qmbform.view.FormEditPasswordFloatingCell;
 import com.quemb.qmbform.view.FormEditPasswordInlineFieldCell;
 import com.quemb.qmbform.view.FormEditPhoneFieldCell;
 import com.quemb.qmbform.view.FormEditTextFieldCell;
@@ -31,6 +32,7 @@ import com.quemb.qmbform.view.FormEditTextInlineFieldCell;
 import com.quemb.qmbform.view.FormEditTextViewFieldCell;
 import com.quemb.qmbform.view.FormEditTextViewInlineFieldCell;
 import com.quemb.qmbform.view.FormEditURLFieldCell;
+import com.quemb.qmbform.view.FormErrorFieldCell;
 import com.quemb.qmbform.view.FormExternalButtonFieldCell;
 import com.quemb.qmbform.view.FormIntegerSliderFieldCell;
 import com.quemb.qmbform.view.FormMultipleDialogFieldCell;
@@ -45,6 +47,7 @@ import com.quemb.qmbform.view.SectionCell;
 import com.quemb.qmbform.view.SeperatorSectionCell;
 
 import android.content.Context;
+import android.inputmethodservice.Keyboard;
 import android.os.Build;
 import android.util.Log;
 
@@ -122,6 +125,8 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSectionSeperator, SeperatorSectionCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHtmlVertical, FormDetailHtmlTextVerticalFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeFloatingTextView, FormEditTextFloatingFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeFloatingPasswordView, FormEditPasswordFloatingCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeErrorView, FormErrorFieldCell.class);
     }
 
     public Cell createViewForFormItemDescriptor(Context context, FormItemDescriptor descriptor) {

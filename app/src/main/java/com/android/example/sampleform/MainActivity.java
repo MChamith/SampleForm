@@ -14,6 +14,7 @@ import com.android.example.sampleform.validators.PasswordValidator;
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
 import com.quemb.qmbform.annotation.FormElement;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.OnFocusChangeListener;
@@ -45,13 +46,9 @@ public class MainActivity extends AppCompatActivity implements OnFormRowValueCha
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        HashMap<String, Value<?>> vvmChangesMap = new HashMap<String, Value<?>>();
-
         // More styles and colors for cells
-        HashMap<String, Object> cellConfig = new HashMap<>(8);
 
         FormDescriptor descriptor = FormDescriptor.newInstance();
-        descriptor.setCellConfig(cellConfig);
         descriptor.setOnFormRowChangeListener(this);
 
 
@@ -62,22 +59,31 @@ public class MainActivity extends AppCompatActivity implements OnFormRowValueCha
         descriptor.addSection(passwordDescriptor);
         SectionDescriptor emailDescriptor = SectionDescriptor.newInstance("Email");
         descriptor.addSection(emailDescriptor);
+        SectionDescriptor mobileDescriptor = SectionDescriptor.newInstance("Mobile");
+        descriptor.addSection(mobileDescriptor);
         SectionDescriptor dateDescriptor = SectionDescriptor.newInstance("Date");
         descriptor.addSection(dateDescriptor);
-        mListView = findViewById(R.id.list);
+        mListView = (ListView) findViewById(R.id.list);
 
 
-        final RowDescriptor userName = RowDescriptor.newInstance("UserName",RowDescriptor.FormRowDescriptorTypeText, "Username");
+        final RowDescriptor userName = RowDescriptor.newInstance("UserName",RowDescriptor.FormRowDescriptorTypeFloatingTextView);
+        userName.setHint(R.string.username_hint);
         userNameDescriptor.addRow(userName, 0);
 
-        final RowDescriptor password = RowDescriptor.newInstance("Password",RowDescriptor.FormRowDescriptorTypeFloatingTextView ,"Password");
-
+        final RowDescriptor password = RowDescriptor.newInstance("Password",RowDescriptor.FormRowDescriptorTypeFloatingPasswordView);
+        password.setHint(R.string.password_hint);
         password.addValidator(new PasswordValidator());
         passwordDescriptor.addRow(password,0);
-//
-        final RowDescriptor email = RowDescriptor.newInstance("Email",RowDescriptor.FormRowDescriptorTypeEmail, "Email");
+////
+        final RowDescriptor email = RowDescriptor.newInstance("Email",RowDescriptor.FormRowDescriptorTypeFloatingTextView);
+        email.setHint(R.string.email_hint);
         email.addValidator(new EmailValidator());
         emailDescriptor.addRow(email);
+
+        final RowDescriptor mobile = RowDescriptor.newInstance("Mobile",RowDescriptor.FormRowDescriptorTypeFloatingTextView);
+        mobile.setHint(R.string.mobile_hint);
+//        mobile.addValidator(new EmailValidator());
+        mobileDescriptor.addRow(mobile);
 
         final RowDescriptor dateLabel = RowDescriptor.newInstance("DateLable",RowDescriptor.FormRowDescriptorTypeDate, "Date" );
         dateDescriptor.addRow(dateLabel);
@@ -88,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements OnFormRowValueCha
         formManager.setOnFormRowClickListener(this);
         formManager.setOnFormRowValueChangedListener(this);
         formManager.setOnFocusChangeListener(this);
-
 
     }
 
@@ -107,69 +112,16 @@ public class MainActivity extends AppCompatActivity implements OnFormRowValueCha
 
     @Override
     public void focusChanged(RowDescriptor rowDescriptor, boolean hasFocus) {
-
-        String tag = rowDescriptor.getTag();
-
-        if (hasFocus) {
-            if (tag.equals("UserName")) {
-                USERNAME_FOCUS = true;
-            } else if (tag.equals("Password")) {
-                PASSWORD_FOCUS = true;
-            } else if (tag.equals("Email")) {
-                EMAIL_FOCUS = true;
-            }
-        }
-
-//        if (!hasFocus && tag.equals("Password") && PASSWORD_FOCUS) {
-//            int index = rowDescriptor.getSectionDescriptor().getIndexOfRowDescriptor(rowDescriptor);
-//            SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
 //
-//            if (!rowDescriptor.isValid()) {
-//                List errors = rowDescriptor.getValidationErrors();
-//                for (Object err : errors) {
-//                    RowValidationError rowerr = (RowValidationError) err;
-//                    String errorMessage = rowerr.getMessage(this);
-//                    int rowCount = sectionDescriptor.getRowCount();
-//                    if(rowCount ==1){
-//                        sectionDescriptor.addRow(RowDescriptor.newInstance("passwordError", RowDescriptor.FormRowDescriptorTypeDetail, "Error", new Value<String>(errorMessage)), index + 1);
-//                    }
-//                }
-//            }
-//        }
-//        if (!hasFocus && tag.equals("Email") && EMAIL_FOCUS) {
-//            int index = rowDescriptor.getSectionDescriptor().getIndexOfRowDescriptor(rowDescriptor);
-//            SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
+//        String tag = rowDescriptor.getTag();
 //
-//            if (!rowDescriptor.isValid()) {
-//                List errors = rowDescriptor.getValidationErrors();
-//                for (Object err : errors) {
-//                    RowValidationError rowerr = (RowValidationError) err;
-//                    String errorMessage = rowerr.getMessage(this);
-//                    int rowCount = sectionDescriptor.getRowCount();
-//                    if(rowCount ==1){
-//                        sectionDescriptor.addRow(RowDescriptor.newInstance("emailError", RowDescriptor.FormRowDescriptorTypeDetail, "Error", new Value<String>(errorMessage)), index + 1);
-//                    }
-//
-//                }
-//
-//            }
-//        }
-//        if (!hasFocus && tag.equals("Date") && DATE_FOCUS) {
-//            int index = rowDescriptor.getSectionDescriptor().getIndexOfRowDescriptor(rowDescriptor);
-//            SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
-//
-//            if (!rowDescriptor.isValid()) {
-//                List errors = rowDescriptor.getValidationErrors();
-//                for (Object err : errors) {
-//                    RowValidationError rowerr = (RowValidationError) err;
-//                    String errorMessage = rowerr.getMessage(this);
-//                    int rowCount = sectionDescriptor.getRowCount();
-//                    if(rowCount ==1){
-//                        sectionDescriptor.addRow(RowDescriptor.newInstance("dateError", RowDescriptor.FormRowDescriptorTypeDetail, "Error", new Value<String>(errorMessage)), index + 1);
-//                    }
-//
-//                }
-//
+//        if (hasFocus) {
+//            if (tag.equals("UserName")) {
+//                USERNAME_FOCUS = true;
+//            } else if (tag.equals("Password")) {
+//                PASSWORD_FOCUS = true;
+//            } else if (tag.equals("Email")) {
+//                EMAIL_FOCUS = true;
 //            }
 //        }
     }
