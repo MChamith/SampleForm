@@ -26,7 +26,7 @@ ADDED from /home/chamith/Documents/Work/msidAndroid/SampleForm/lib/QMBForm/src/m
 	android:label
 		ADDED from /home/chamith/Documents/Work/msidAndroid/SampleForm/lib/QMBForm/src/main/AndroidManifest.xml:5:9-41
 	android:windowSoftInputMode
-		ADDED from /home/chamith/Documents/Work/msidAndroid/SampleForm/lib/QMBForm/src/main/AndroidManifest.xml:6:9-50
+		ADDED from /home/chamith/Documents/Work/msidAndroid/SampleForm/lib/QMBForm/src/main/AndroidManifest.xml:6:9-48
 	android:allowBackup
 		ADDED from /home/chamith/Documents/Work/msidAndroid/SampleForm/lib/QMBForm/src/main/AndroidManifest.xml:4:18-44
 uses-sdk

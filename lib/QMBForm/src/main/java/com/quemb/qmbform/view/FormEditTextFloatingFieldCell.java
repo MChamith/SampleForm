@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -70,14 +71,16 @@ public class FormEditTextFloatingFieldCell extends FormBaseCell {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
 
+//                mEditView.requestFocus();
                 System.out.println(getRowDescriptor().getTag().toString() + " focus " + hasFocus);
 
-                if (!(hasFocus) && (mEditView.getText().toString().length()>0)) {
+                if (!(hasFocus) && (mEditView.getText().toString().length() > 0)) {
                     if (!getRowDescriptor().isValid()) {
                         List errors = rowDescriptor.getValidationErrors();
                         for (Object err : errors) {
                             RowValidationError rowerr = (RowValidationError) err;
                             String errorMessage = rowerr.getMessage(context);
+//                            textInputLayout.setError(errorMessage);
                             textInputLayout.setHelperText(errorMessage);
                             textInputLayout.setHelperTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_red1)));
 //                            mEditView.clearFocus();
@@ -91,16 +94,18 @@ public class FormEditTextFloatingFieldCell extends FormBaseCell {
             }
         });
 
+
     }
 
     protected void onEditTextChanged(String string) {
         onValueChanged(new Value<String>(string));
     }
 
-    protected void onFocusChange(boolean hasFocus){
+    protected void onFocusChange(boolean hasFocus) {
 //        Log.d("FousText", "Focus on Formbase text field");
-        focusChanged(hasFocus);
+//        focusChanged(hasFocus);
     }
+
     @Override
     protected int getResource() {
         return R.layout.edit_text_floating_cell;
@@ -113,12 +118,10 @@ public class FormEditTextFloatingFieldCell extends FormBaseCell {
 
         updateEditView();
 
-        if (getRowDescriptor().getDisabled())
-        {
+        if (getRowDescriptor().getDisabled()) {
             mEditView.setEnabled(false);
             setTextColor(mEditView, CellDescriptor.COLOR_VALUE_DISABLED);
-        }
-        else
+        } else
             mEditView.setEnabled(true);
 
     }
@@ -127,7 +130,7 @@ public class FormEditTextFloatingFieldCell extends FormBaseCell {
 
         String hint = getRowDescriptor().getHint(getContext());
         if (hint != null) {
-            TextInputLayout textInputLayout = (TextInputLayout)findViewById(R.id.textInput);
+            TextInputLayout textInputLayout = (TextInputLayout) findViewById(R.id.textInput);
             textInputLayout.setHint(hint);
 
             textInputLayout.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_green)));

@@ -61,33 +61,6 @@ public class FormEditPasswordFloatingCell extends FormBaseCell {
         mEditView.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
-                String text = mEditView.getText().toString();
-//                if(!mEditView.hasFocus()){
-//                    System.out.println("focus " +mEditView.getHint());
-//                    if (!getRowDescriptor().isValid()) {
-//                        List errors = rowDescriptor.getValidationErrors();
-//                        for (Object err : errors) {
-//                            RowValidationError rowerr = (RowValidationError) err;
-//                            String errorMessage = rowerr.getMessage(context);
-//                            textInputLayout.setHelperText(errorMessage);
-//                            textInputLayout.setHelperTextEnabled(true);
-//                            textInputLayout.setHelperTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_red1)));
-//
-//
-//                        }
-//                    }
-//                }
-
-//                if (text.length() > 0) {
-//                    textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_green)));
-//                } else {
-//                    textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_text_grey)));
-//                }
-//                    textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_green)));
-//                } else {
-//                    textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_text_grey)));
-//                }
-
                 FormEditPasswordFloatingCell.this.onEditTextChanged(s.toString());
             }
 
@@ -116,6 +89,7 @@ public class FormEditPasswordFloatingCell extends FormBaseCell {
                             String errorMessage = rowerr.getMessage(context);
                             textInputLayout.setHelperText(errorMessage);
                             textInputLayout.setHelperTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_red1)));
+                            textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.meetsid_green)));
 //                            mEditView.clearFocus();
 
                         }

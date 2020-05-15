@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="cv_capture_bg">#55000000</color>
+    <color name="form_cell_background">#FFFFFF</color>
+    <color name="form_cell_disabled">#777777</color>
+    <color name="greenColor">#ff55a14d</color>
+    <color name="meesid_gold">#FFD700</color>
+    <color name="meetsid_blue">#093C71</color>
+    <color name="meetsid_blue1">#288BFF</color>
+    <color name="meetsid_bronze">#CD7F32</color>
+    <color name="meetsid_gradient_blue">#00ACDE</color>
+    <color name="meetsid_gradient_green">#02A986</color>
+    <color name="meetsid_green">#27B472</color>
+    <color name="meetsid_grey1">#455a64</color>
+    <color name="meetsid_grey2">#A09898</color>
+    <color name="meetsid_grey3">#95666666</color>
+    <color name="meetsid_light_blue">#e3f2fd</color>
+    <color name="meetsid_light_grey">#f3f3f3</color>
+    <color name="meetsid_line_grey">#D2D2D2</color>
+    <color name="meetsid_orange">#ee582e</color>
+    <color name="meetsid_red1">#EE582E</color>
+    <color name="meetsid_silver">#C0C0C0</color>
+    <color name="meetsid_teal">#02A986</color>
+    <color name="meetsid_text_grey">#616161</color>
+    <color name="meetsid_transparent">#00000000</color>
+    <color name="meetsid_white">#FFFFFF</color>
+    <color name="meetsid_yellow">#eeb82e</color>
+    <color name="redColor">#ffa13b3a</color>
+    <color name="section_cell_background">#FFFFFFFF</color>
+    <color name="section_cell_text">#000000</color>
+    <color name="transparentColor">#00000000</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <dimen name="qmb_padding">16dp</dimen>
+    <string name="app_name">QMBForm</string>
+    <string name="btn_select">Select</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="cm_label">cm</string>
+    <string name="date_error" translatable="false">not a valid date</string>
+    <string name="done_button_text">Done</string>
+    <string name="feet_label">feet</string>
+    <string name="height_picker_dialog_title">Select your height</string>
+    <string name="inches_label">inches</string>
+    <string name="invalid_password" translatable="false">Use 8 or more character\nMust Contain letters, numbers and symbol</string>
+    <string name="msg_check_form">Please check your entries</string>
+    <string name="msg_no_entries">No entries are made</string>
+    <string name="msg_x_is_required">is a required field</string>
+    <string name="nonpositive_number_error">must be greater than zero</string>
+    <string name="test_error"/>
+    <string name="title_no_entries">No entries</string>
+    <string name="validation_invalid_email">is not a valid email</string>
+    <string name="validation_is_required">is required</string>
+    <style name="ErrorText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="HintText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/meetsid_red1</item>
+        <item name="android:textSize">14sp</item>
+
+    </style>
+    <style name="MyTextInputLayout">
+
+        <!-- Style attributes -->
+<!--        <item name="boxCornerRadiusBottomStart">0dp</item>-->
+<!--        <item name="boxCornerRadiusTopStart">24dp</item>-->
+<!--        <item name="boxCornerRadiusTopEnd">24dp</item>-->
+<!--        <item name="boxCornerRadiusBottomEnd">0dp</item>-->
+<!--        <item name="boxBackgroundColor">#80ABCDEF</item>-->
+
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="errorTextAppearance">@style/ErrorText</item>
+        <item name="counterTextAppearance">@style/HintText</item>
+
+
+        <!-- Theme attributes -->
+        <item name="android:textColorHint">@color/meetsid_text_grey</item>
+
+        <item name="colorControlNormal">@color/meetsid_text_grey</item>
+        <item name="colorControlActivated">@color/meetsid_green</item>
+
+    </style>
+    <style name="TextInputLayoutHintText" parent="TextAppearance.Design.Hint">
+        <item name="android:gravity">bottom</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/meetsid_green</item>
+        <item name="android:colorActivatedHighlight">@color/meetsid_green</item>
+        <item name="android:state_focused">false</item>
+    </style>
+    <declare-styleable name="Cell">
+
+        <attr format="color" name="qmbFromSectionBackgroundColor"/>
+
+        <attr format="color" name="qmbFromRowBackgroundColor"/>
+        <attr format="color" name="qmbFromRowDividerColor"/>
+        <attr format="color" name="qmbFromRowTitleColor"/>
+    </declare-styleable>
+</resources>
